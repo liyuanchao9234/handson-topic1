@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: "2010-09-09"
+## =================== DESCRIPTION =================== ##
+Description: >-
+  A Cloudformation Stack for A AWS S3 Http Static Website realized by
+    - S3 bucket with public access
+    - Http access
+    - a path is redirected defined by RoutingRules
+
+
+## ===================== METADATA ===================== ##
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+      - Label:
+          default: Tag parameters for all tagable resources
+        Parameters:
+          - paramUniqueTagName
+          - paramUniqueTagValue
+      - Label:
+          default: Topic's specific parms
+        Parameters:
+          - paramRedirectRoute
+
+## ==================== PARAMETERS ==================== ##
+Parameters:
+  paramUniqueTagName:
+    Type: String
+    Default: 'yuanchao-handson-tag'
+    Description: unique tag's name for all resources defined in this stack Cloudformation
+  paramUniqueTagValue: 
+    Type: String
+    Description: unique tag's value
+  paramRedirectRoute:
+    Type: String
+    Description: this path will be redirected to index.html
+
+
+## =================== RESOURCES =================== ##
+Resources:
+  myS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub 's3bucket-${paramUniqueTagValue}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      VersioningConfiguration:
+        Status: Enabled
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+        RoutingRules:
+          - RoutingRuleCondition:
+              KeyPrefixEquals: !Sub '${paramRedirectRoute}'
+            RedirectRule:
+              ReplaceKeyWith: index.html
+      Tags:
+      - Key: !Ref paramUniqueTagName
+        Value: !Ref paramUniqueTagValue
+
+
+  myBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref 'myS3Bucket'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub "${myS3Bucket.Arn}/*"
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - myS3Bucket
+      - WebsiteURL
