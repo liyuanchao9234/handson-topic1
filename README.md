@@ -14,7 +14,7 @@
 
 :point_right: Static website has a simple native redirect rule: the path test-redirect is redirected to index.html(root level), other no-existed path is redirected to error.html
 
-:point_right: Click here to see the bucket URL  [here](https://github.com/lyc-handson-aws/handson-topic1)
+:point_right: Website URL(Bucket URL)  [here](http://s3bucket-handson-topic1.s3-website.eu-west-3.amazonaws.com)
 
 ## **Architecture**
 
