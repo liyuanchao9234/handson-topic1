@@ -1,8 +1,7 @@
-# Topic 1 - Simple Http Static Website with S3
+# Topic 1 - Simple Http Static Website(S3)
+##  Yuanchao Hands-on Project
 
-###### Yuanchao Hands-on Project
-
-###### Check also this doc and project template on Github  [here](https://github.com/lyc-handson-aws/handson-topic1)
+## This readme is more readable [here](https://github.com/lyc-handson-aws/handson-topic1)
 
 ## **Overview** 
 
