@@ -1,4 +1,4 @@
-# Topic 1 - Simple Http Static Website
+# Topic 1 - Simple Http Static Website with S3
 
 ###### Yuanchao Hands-on Project
 
