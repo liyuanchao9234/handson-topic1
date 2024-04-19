@@ -15,6 +15,13 @@
 
 :point_right: Website URL(Bucket URL)  [here](http://s3bucket-handson-topic1.s3-website.eu-west-3.amazonaws.com)
 
+## What could be learned in this topic
+
+1. How to use S3 with public access, including policy and access configuration.
+2. How to configure S3 for type website hosting (by default, it's a type bucket).
+3. How to configure a redirection rule with website hosting."
+
+
 ## **Architecture**
 
 the diagram below illustrates the architecture(principle) of this project:
